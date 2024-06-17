@@ -45,7 +45,7 @@ func genWallet(mnemonic chan []string, api wallet.TonAPI, ctx context.Context, b
 			log.Printf("Address: %s \nMnemo: %s \nBalance: %s\n", _address.String(), strings.Join(_mnemonic, " "), balance.Nano().String())
 		}
 
-		//log.Printf("-- Thread: #%d \nAddress: %s \nMnemo: %s \nBalance: %s\n", thread, _address.String(), strings.Join(_mnemonic, " "), balance.Nano().String())
+		log.Printf("-- Thread: #%d \nAddress: %s \nMnemo: %s \nBalance: %s\n", thread, _address.String(), strings.Join(_mnemonic, " "), balance.Nano().String())
 
 		atomic.AddUint64(&counter, 1)
 		_counter := atomic.LoadUint64(&counter)
@@ -76,7 +76,7 @@ func main() {
 	}
 
 	for t := 0; t < appCfg.threads; t++ {
-		fmt.Printf("Thread %d start...", t)
+		fmt.Printf("Thread %d start...\n", t)
 		go genWallet(chData, api, ctx, block, t)
 	}
 
